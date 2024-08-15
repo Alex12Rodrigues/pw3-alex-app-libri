@@ -1,9 +1,11 @@
+import style from './CardBook.module.css'
 
-const CardBooks = (props)=> {
+const CardBooks = ({titulo, autor, imagem})=> {
     return (
         <div>
-            <h3>{props.titulo}</h3>
-            <p>{props.autor}</p>
+            <h3>{titulo}</h3>
+            <p>{autor}</p>
+            <img src= {imagem} alt ={titulo} title={{titulo}}/>
         </div>
     )
 }

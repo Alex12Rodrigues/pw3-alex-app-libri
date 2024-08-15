@@ -1,5 +1,12 @@
+/* Importa o CSS*/
 import './App.css'
+
+/* Importa o componente de card de livro*/
 import CardBooks from './components/CardBooks'
+
+/* Importa o arquivo da imagem da capa do livro*/
+import capalivro from './assets/livros/cavernas_aco.jpg'
+
 
 function App() {
 
@@ -7,15 +14,10 @@ function App() {
     <>
     <CardBooks 
     titulo = 'Naruto Uzumaki'
-    autor = 'Minato Namikaze'/>
+    autor = 'Minato Namikaze'
+    imagem = {capalivro}
+    />
     
-    <CardBooks 
-    titulo = 'Goku'
-    autor = 'Bardock'/>
-    
-    <CardBooks 
-    titulo = 'Midoria Izuku'
-    autor = 'All Might'/>
     </>
   )
 }
