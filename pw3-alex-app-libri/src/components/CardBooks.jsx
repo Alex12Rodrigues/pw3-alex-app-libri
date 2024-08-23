@@ -1,11 +1,17 @@
-import style from './CardBook.module.css'
+import style from './CardBooks.module.css'
+import Button from './Button'
 
-const CardBooks = ({titulo, autor, imagem})=> {
+
+const CardBooks = ({titulo, autor, imagem, Button})=> {
     return (
         <div>
             <h3>{titulo}</h3>
             <p>{autor}</p>
             <img src= {imagem} alt ={titulo} title={{titulo}}/>
+
+            <div>
+                <Button label = "detalhe"></Button>
+            </div>
         </div>
     )
 }
