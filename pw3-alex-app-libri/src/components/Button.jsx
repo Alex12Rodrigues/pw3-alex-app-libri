@@ -2,8 +2,8 @@ import style from './Button.module.css'
 
 const Button = ({label})=> {
     return(
-        <div>
-            <Button className= {style.buttonContainer}>{label}</Button>
+        <div className= {style.button_Container}>
+            <Button>{label}</Button>
         </div>
     )
 }
