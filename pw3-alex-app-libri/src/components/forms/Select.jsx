@@ -12,15 +12,10 @@ function Select({type, text, name, options}){
 
             {
                 options.map((option)=>{
-                    console.log(option.cod_categoria +  ' - ' + option.nome_categoria)
+                    // console.log(option.cod_categoria +  ' - ' + option.nome_categoria)
+                    return <option> {option.nome_categoria} </option>
                 })
             }
-
-            <option>Selecione uma categoria</option>
-            <option>Ficção científica</option>
-            <option>Fantasia heróica</option>
-            <option>Suspense</option>
-            <option>Terror</option>
 
         </select>
 
