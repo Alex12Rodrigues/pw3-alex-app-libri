@@ -8,29 +8,33 @@ import Button from "../forms/Button";
 
 const CreateBooks = () => {
 
+    ///* DEFINE O STATUS DE DADOS DAS CATEGORIAS */
+    const [categorias, setCategorias] = useState ([]) 
+
     useEffect(() => {
         fetch('http://localhost:5000/listagemCateorias', {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "*",
-          },
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+            },
         }).then(
-            (resp)=>
+            (resp) =>
                 // console.log('RESPOSTA: '+ resp)
                 resp.json()
-            
+
         ).then(
-            (data)=>{
+            (data) => {
                 console.log('DATA: ' + data.data[0].nome_categoria)
+                setCategorias(data.data)
             }
         ).catch(
-            (error)=>{
+            (error) => {
                 console.log(error)
             }
         )
-    },[]);
+    }, []);
 
 
     return (
@@ -42,31 +46,32 @@ const CreateBooks = () => {
                 type="text"
                 name="text_livro"
                 text="Título do livro"
-                placeHolder="Digite o nome do seu livro aqui" 
-                />
+                placeHolder="Digite o nome do seu livro aqui"
+            />
 
             <Input
                 type="text"
                 name="text_livro"
                 text="Nome do autor"
-                placeHolder="Digite o nome do autor aqui" 
-                />
+                placeHolder="Digite o nome do autor aqui"
+            />
 
             <Input
                 type="text"
                 name="text_livro"
                 text="Descrição do livro"
-                placeHolder="Digite a descrição do livro" 
-                />
+                placeHolder="Digite a descrição do livro"
+            />
 
 
             <Select
                 name="categoria"
                 text="Escolha uma cetegoria de livro"
+                options={categorias}
             />
 
-            <Button 
-            rotulo="Cadastrar livro"
+            <Button
+                rotulo="Cadastrar livro"
             />
 
 
