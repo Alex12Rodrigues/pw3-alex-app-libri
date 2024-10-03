@@ -89,7 +89,7 @@ const CreateBooks = () => {
 
             <h1>Cadastro de livros</h1>
 
-            <form> submit = {submit}
+            <form submit = {submit}>
 
                 <Input
                     type="text"

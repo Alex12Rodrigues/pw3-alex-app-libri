@@ -20,7 +20,6 @@ function App() {
   return (
     <>
 
-    /*Estrutura de navegação*/
       <BrowserRouter>
 
         <Container>
