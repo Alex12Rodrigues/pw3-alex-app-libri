@@ -1,133 +1,116 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
-import style from './CreateBooks.module.css'
-
+import style from "./CreateBooks.module.css";
 import Input from "../forms/Input";
 import Select from "../forms/Select";
 import Button from "../forms/Button";
 
-const CreateBooks = ()=>{
+const CreateBooks = () => {
+    const [categorias, setCategorias] = useState([]);
 
-    /* DEFINE O STATE DE DADOS DAS CATEGORIAS */
-    const [categorias, setCategorias] = useState([])
+    const [book, setBook] = useState({});
 
-    /* STATE DE DADOS QUE VAI ARMAZENAR O OBJETO JSON DE LIVRO */
-    const [book, setBook] = useState({})
-
-    /* HANDLER DE CAPTURA DOS DADOS DE INPUT (NOME DO LIVRO, AUTOR E DESCRIÇÃO) */
     function handlerChangeBook(event) {
-        setBook({...book, [event.target.name] : event.target.value});
-        console.log(book)
+        setBook({ ...book, [event.target.name]: event.target.value });
+        console.log(book);
     }
 
-    /* RECUPERA OS DADOS DE CATEGORIAS DA APIREST */
-    useEffect(()=>{
-        fetch('http://localhost:5000/listagemCateorias', {
-            method:'GET',
-            headers:{
-                'Content-Type':'application/json',
-                'Access-Control-Allow-Origin':'*',
-                'Access-Control-Allow-Headers':'*',
-            }
-        }).then(
-            (resp)=>
-                // console.log('RESPOSTA:' + resp)
-                resp.json()
-            
-        ).then(
-            (data)=>{
-                console.log('DATA: ' + data.data[0].nome_categoria)
-                setCategorias(data.data)
-            }
-        ).catch(
-            (error)=>{
-                console.log(error)
-            }
-        )
-    },[]);
+    function handleChangeCategory(event) {
+        setBook({ ...book, cod_categoria: event.target.value });
+        console.log(book);
+    }
 
-    /* INSERÇÃO DOS DADOS DE LIVRO */
     function createBook(book) {
-        
+
         console.log(JSON.stringify(book))
 
         fetch('http://localhost:5000/inserirLivro', {
-                method:'POST',
-                mode:'cors',
-                headers:{
-                'Content-Type':'application/json',
-                'Access-Control-Allow-Origin':'*',
-                'Access-Control-Allow-Headers':'*'
-                },
-                body: JSON.stringify(book)
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*'
+            },
+            body: JSON.stringify(book)
         })
-        .then(
-                (resp)=>resp.json()
-        )
-        .then(
-                (data)=>{
-                console.log(data);
-                // navigate('/livros',{state:'LIVRO CADASTRADO COM SUCESSO!'});
+            .then(
+                (resp) => resp.json()
+            )
+            .then(
+                (data) => {
+                    console.log(data);
+                    // navigate('/livros',{state:'LIVRO CADASTRADO COM SUCESSO!'});
                 }
-        )
-        .catch(
-                (err)=>{ console.log(err) }
-        )
+            )
+            .catch(
+                (err) => { console.log(err) }
+            )
     }
 
-    /* FUNÇÃO DE SUBMIT */
+    useEffect(() => {
+        fetch("http://localhost:5000/listagemCateorias", {
+            method: "GET",
+            header: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+            },
+        })
+            .then((resp) =>
+                // console.log("RESPOSTA: " + resp);
+                resp.json()
+            )
+            .then((data) => setCategorias(data.data))
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     function submit(event) {
         event.preventDefault();
         createBook(book);
     }
 
-    return(
+    return (
         <section className={style.create_book_container}>
-            
-            <h1>CADASTRO DE LIVROS</h1>
-
+            <h1>CREATE BOOKS</h1>
             <form onSubmit={submit}>
-
-                <Input 
-                    type='text'
-                    name='nome_livro'
-                    placeHolder='Digite o nome do seu livro aqui'
-                    text='Título do livro'
+                <Input
+                    type="text"
+                    name="nome_livro"
+                    placeholder="Digite o nome do seu livro aqui"
+                    text="Título do livro"
                     handlerChangeBook={handlerChangeBook}
                 />
 
-                <Input 
-                    type='text'
-                    name='autor_livro'
-                    placeHolder='Digite o nome do autor'
-                    text='Nome do autor'
+                <Input
+                    type="text"
+                    name="autor_livro"
+                    placeholder="Digite o nome do autor"
+                    text="Nome do autor"
                     handlerChangeBook={handlerChangeBook}
                 />
 
-                <Input 
-                    type='text'
-                    name='descricao_livro'
-                    placeHolder='Digite a descrição do livro'
-                    text='Descrição do livro'
+                <Input
+                    type="text"
+                    name="descricao_livro"
+                    placeholder="Digite a descrição do livro"
+                    text="Descrição do livro"
                     handlerChangeBook={handlerChangeBook}
                 />
 
-                <Select 
-                    name='categoria'
-                    text='Escolha uma categoria de livro'
+                <Select
+                    name="categoria"
+                    text="Escolha uma categoria de livro"
                     options={categorias}
+                    handlerChangeCategory={handleChangeCategory}
                 />
 
-                <Button 
-                    rotulo='Cadastrar Livro'
-                />
-
+                <Button rotulo="Cadastrar Livro" />
             </form>
-
         </section>
-    )
+    );
+};
 
-}
-
-export default CreateBooks
+export default CreateBooks;
