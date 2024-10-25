@@ -1,33 +1,40 @@
-import "./App.css";
-import NavBar from "./components/layout/NavBar";
-import Container from "./components/layout/Container";
-import Home from "./components/pages/Home";
-import CreateBooks from "./components/pages/CreateBooks";
-import ListBooks from "./components/pages/ListBooks";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import './App.css'
+import NavBar from './components/layout/NavBar'
+import Container from './components/layout/Container'
+import Home from './components/pages/Home'
+import ListBook from './components/pages/ListBooks'
+import CreateBooks from './components/pages/CreateBooks'
+import DetailBook from './components/pages/DetailBook'
+
 
 function App() {
+
   return (
     <>
+      {/* estrutura de navegaçao */}
       <BrowserRouter>
 
         <Container>
 
-          <Routes>
+        <Routes>
+          <Route path= '/' element={<NavBar/>}>
+            <Route path= '/' element={<Home/>}/>
+            <Route path= '/listBook' element={<ListBook/>}/>
+            <Route path= '/createBook' element={<CreateBooks/>}/>
+            <Route path= '/DetailBook/:cod_livro' element={<DetailBook/>}/>
+          </Route>
 
-            <Route path="/" element={<NavBar />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/listBook" element={<ListBooks />} />
-              <Route path="/createBook" element={<CreateBooks />} />
-            </Route>
-
-          </Routes>
+        </Routes>
 
         </Container>
 
       </BrowserRouter>
+      
+
+    
     </>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -32,7 +32,7 @@ const ListBooks = () => {
 
     return (
         <Container>
-            <section className={style.list_books_container}>
+            <section className={style.list_book_container}>
                 <h1>LIST BOOKS</h1>
 
                 <ContainerBook>
