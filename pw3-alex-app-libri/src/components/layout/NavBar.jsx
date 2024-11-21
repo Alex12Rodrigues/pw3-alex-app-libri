@@ -21,7 +21,7 @@ const NavBar = () => {
                         <li className={style.item}>Cadastrar Livro</li>
                     </Link>
 
-                    <Link to="/listBook">
+                    <Link to="/listBooks">
                         <li className={style.item}>Listar Livro</li>
                     </Link>
                 </ul>
